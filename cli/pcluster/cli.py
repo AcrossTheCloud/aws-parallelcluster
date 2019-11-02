@@ -83,19 +83,6 @@ def config_logger():
     ch.setFormatter(logging.Formatter("%(message)s"))
     logger.addHandler(ch)
 
-    logfile = os.path.expanduser(os.path.join("~", ".parallelcluster", "pcluster-cli.log"))
-    try:
-        os.makedirs(os.path.dirname(logfile))
-    except OSError as e:
-        if e.errno != errno.EEXIST:
-            raise  # can safely ignore EEXISTS for this purpose...
-
-    fh = logging.FileHandler(logfile)
-    fh.setLevel(logging.DEBUG)
-    fh.setFormatter(logging.Formatter("%(asctime)s - %(levelname)s - %(name)s - %(message)s"))
-    logger.addHandler(fh)
-
-
 def _addarg_config(subparser):
     subparser.add_argument("-c", "--config", dest="config_file", help="Defines an alternative config file.")
 
